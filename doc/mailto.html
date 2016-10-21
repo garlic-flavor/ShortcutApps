@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="apple-touch-icon" href="./mailto-icon.png" />
+    <title>Mailto</title>
+  </head>
+  <body>
+    <h1 style="text-align:center; color:grey;">MAIL TO</h1>
+    <div id="context"></div>
+    <script type="text/javascript">
+      function getAddressParameters()
+      {
+        var url = window.location.href;
+        var q = url.indexOf("?");
+        if (-1 == q) return {};
+        var params = url.substr(q+1).split("\&");
+        var obj = {}
+        for (var i = 0; i < params.length; i++)
+        {
+          var j = params[i].indexOf("=");
+          if (-1 == j) continue;
+          var key = params[i].substring(0, j);
+          var val = params[i].substr(j+1);
+          obj[ key ] = val;
+        }
+        return obj;
+      }
+      (function()
+      {
+        var param = getAddressParameters();
+        if( "name" in param && "address" in param )
+        {
+           var address = param["address"];
+           var div = document.getElementById("context");
+           div.innerHTML = "<div style='font-size: 50pt; font-weight: bold; text-align: center;'>" + decodeURI(param["name"]) + "</div></br />" + "<div style='font-size: 12pt; font-weight: bold; text-align: center;'><a href='mailto:" + address + "'>" + address + "</a></div><br />";
+           location.href = "mailto:" + address;
+         }
+       })();
+    </script>
+  </body>
+</html>
