@@ -1,3 +1,4 @@
 # Shortcut Apps
 
-Put shortcut icons on your home screen.
+## How to use.
+please see https://garlic-flavor.github.io/ShortcutApps/index.html
